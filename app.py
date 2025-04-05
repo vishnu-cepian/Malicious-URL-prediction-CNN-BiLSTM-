@@ -56,8 +56,8 @@ def predict():
     data = request.get_json()
     url = data.get("url")
     print("URL: " + url)
-    
-    transform_url = transformURL(url)
+    URL = clean(url)
+    transform_url = transformURL(URL)
 
     transform_url = transform_url.reshape(1, -1)
 
@@ -151,6 +151,11 @@ def count_Dot(url):
     except Exception as e:
         print(e)
     
+def clean(url):
+    try:
+        return url.replace("https://","").replace("http://",'')
+    except Exception as e:
+        print(e)
 
 def count_Www(url):
     try:
@@ -313,4 +318,4 @@ def letter_Count(url):
         print(e)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=4000, debug=False)
